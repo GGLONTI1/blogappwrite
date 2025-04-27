@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { CategoryProvider } from "../context/CategoryContext";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -20,11 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className}`}>
-        <div className="mx-auto max-w-screen-lg">
-          <div className="flex min-h-screen flex-col">{children}</div>
+      <body className={`${poppins.className} max-h-screen overflow-hidden`}>
+        <div className="px-6 pt-2 mx-auto max-w-screen-lg">
+          <Header />
+          <CategoryProvider>
+            <div className="flex min-h-screen flex-col">{children}</div>
+          </CategoryProvider>
         </div>
-        {children}
       </body>
     </html>
   );

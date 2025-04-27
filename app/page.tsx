@@ -1,9 +1,22 @@
-import Image from "next/image";
+import Categories from "../components/Categories";
+import Blogs from "../components/Blogs";
+import { getBlogs } from "../lib/actions/blog.actions";
+import { getCategories } from "../lib/actions/category.actions";
 
-export default function Home() {
+async function fetchCategories() {
+  return await getCategories();
+}
+async function fetchBlogs() {
+  return await getBlogs();
+}
+export default async function Home() {
+  const categories = await fetchCategories();
+  const blogs = await fetchBlogs();
+
   return (
     <div>
-      Home
+      <Categories categories={categories?.documents} />
+      <Blogs blogs={blogs} />
     </div>
   );
 }
